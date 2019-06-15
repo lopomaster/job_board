@@ -6,10 +6,12 @@ Rails.application.routes.draw do
                  controllers: {
                      sessions: 'api/v1/sessions', registrations: 'api/v1/registrations'
                  }
-      
-      resources :users, except: [:edit, :new] do
+
+      resources :users, except: [:edit, :new, :show] do
         get :subscribe_to_advert
       end
+      get 'user/:username', to: 'users#show', as: :username
+
     end
   end
 

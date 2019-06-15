@@ -30,7 +30,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   private
 
   def set_user
-    @user = params[:id].present? ? User.find(params[:id]) : User.find_by_name(params[:name])
+    @user = params[:id].present? ? User.find(params[:id]) : User.find_by_username(params[:username])
     render json: ApiMessage.not_found, status: :not_found if @user.blank?
   end
 
