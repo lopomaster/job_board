@@ -13,4 +13,6 @@ class User < ApplicationRecord
   validates_uniqueness_of :username, :email
   validates_format_of :email, :with => Devise::email_regexp
 
+  accepts_nested_attributes_for :user_profile, reject_if: :all_blank, allow_destroy: false
+
 end

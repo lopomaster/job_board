@@ -5,4 +5,12 @@ class Api::V1::ApplicationController < ActionController::API
 
   before_action :authorize_request
 
+  before_action :set_default_per_page, only: :index
+
+  private
+
+  def set_default_per_page
+    @per_page = params[:per_page] || 10
+  end
+
 end

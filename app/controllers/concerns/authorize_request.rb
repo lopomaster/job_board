@@ -15,4 +15,5 @@ module AuthorizeRequest
   def authorization?
     return true if request.headers['Authorization'].present?
   end
+
 end
