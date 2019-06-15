@@ -1,7 +1,8 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
 
-  before_action :set_user, only: :show
+  before_action :set_user, only: [:show, :update]
 
+  load_and_authorize_resource :user
   respond_to :json
 
   def show
@@ -15,16 +16,12 @@ class Api::V1::UsersController < Api::V1::ApplicationController
            serializer: ActiveModel::Serializer::CollectionSerializer
   end
 
-  def create
-
-  end
-
   def update
-
-  end
-
-  def subscribe_to_advert
-
+    if @user.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -32,6 +29,10 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   def set_user
     @user = params[:id].present? ? User.find(params[:id]) : User.find_by_username(params[:username])
     render json: ApiMessage.not_found, status: :not_found if @user.blank?
+  end
+
+  def user_params
+    params.require(:user).permit(:first_mame, :last_name, :email, :password, :password_confirmation)
   end
 
 end

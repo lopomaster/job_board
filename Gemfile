@@ -51,6 +51,7 @@ gem 'sqlite3'
 
 gem 'ransack', '~> 2.1.1'
 gem 'kaminari'
+gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
