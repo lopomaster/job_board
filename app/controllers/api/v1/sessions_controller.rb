@@ -2,8 +2,10 @@ class Api::V1::SessionsController < Devise::SessionsController
   include Devise::Controllers::Helpers
 
   skip_before_action :verify_authenticity_token
-  prepend_before_action :require_no_authentication, only: [:create]
-  before_action :rewrite_param_names, only: [:create]
+  prepend_before_action :require_no_authentication, only: :create
+  before_action :rewrite_param_names, only: :create
+
+  respond_to :json
 
   def new
     render json: Message.missing_token, status: 401

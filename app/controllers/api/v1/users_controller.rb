@@ -17,11 +17,8 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    @user.update(user_params)
+    render_resource @user
   end
 
   private
