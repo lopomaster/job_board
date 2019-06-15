@@ -1,6 +1,9 @@
 class CreateTables < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
+
+      t.references :profile, polymorphic: true, null: false
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :username,           null: false
@@ -19,16 +22,32 @@ class CreateTables < ActiveRecord::Migration[5.2]
     end
 
     add_index :users, :email, unique: true
+    add_index :users, :username, unique: true
 
-    create_table :user_profiles do |t|
-      t.belongs_to :user, foreign_key: true
-      t.integer :user_type_cd, default: 0
-      t.timestamps
-    end
+
+    # create_table :user_profiles do |t|
+    #   t.belongs_to :user, foreign_key: true
+    #   t.integer :user_type_cd, default: 0
+    #   t.timestamps
+    # end
 
     create_table :jobs do |t|
       t.string :company
       t.string :description
+      t.timestamps
+    end
+
+    create_table :companies do |t|
+      t.string :name
+      t.string :description
+      t.timestamps
+    end
+
+    add_index :companies, :name, unique: true
+
+    create_table :candidates do |t|
+      t.string :profession
+      t.string :notes
       t.timestamps
     end
 

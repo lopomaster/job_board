@@ -12,6 +12,20 @@
 
 ActiveRecord::Schema.define(version: 2019_06_14_203215) do
 
+  create_table "candidates", force: :cascade do |t|
+    t.string "profession"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.string "company"
     t.string "description"
@@ -19,15 +33,9 @@ ActiveRecord::Schema.define(version: 2019_06_14_203215) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_profiles", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "user_type_cd", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_profiles_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
+    t.string "profile_type", null: false
+    t.integer "profile_id", null: false
     t.string "email", default: "", null: false
     t.string "username", null: false
     t.string "first_name"
@@ -40,6 +48,8 @@ ActiveRecord::Schema.define(version: 2019_06_14_203215) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["profile_type", "profile_id"], name: "index_users_on_profile_type_and_profile_id"
   end
 
 end
