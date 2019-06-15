@@ -33,13 +33,13 @@ class CreateTables < ActiveRecord::Migration[5.2]
 
     create_table :jobs do |t|
       t.string :company
-      t.string :description
+      t.text :description
       t.timestamps
     end
 
     create_table :companies do |t|
       t.string :name
-      t.string :description
+      t.text :description
       t.timestamps
     end
 
