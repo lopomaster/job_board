@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def render_resource(resource)
     if resource.errors.empty?
-      render json: resource, status: :OK
+      render json: resource
     else
       validation_error(resource)
     end

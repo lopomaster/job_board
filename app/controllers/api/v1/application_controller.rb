@@ -9,7 +9,7 @@ class Api::V1::ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def routing_error
-
+    not_found ApiMessage.invalid_route
   end
 
   private

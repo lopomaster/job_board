@@ -40,4 +40,9 @@ class ApiMessage
     { message: 'Token verification error', code: 'VE'}
   end
 
+  def self.invalid_route
+    { message: 'Route not found', code: 'RNF'}
+
+  end
+
 end

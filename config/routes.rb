@@ -19,6 +19,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
 
 
-  # match "*path", to: "api/v1/application#routing_error", via: :all
+  match "*path", to: "api/v1/application#routing_error", via: :all
 
 end

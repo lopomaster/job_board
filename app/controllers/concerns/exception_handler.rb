@@ -35,7 +35,6 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordNotFound do |e|
       not_found ApiMessage.not_found
     end
-
   end
 
   private
