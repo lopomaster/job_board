@@ -24,16 +24,10 @@ class CreateTables < ActiveRecord::Migration[5.2]
     add_index :users, :email, unique: true
     add_index :users, :username, unique: true
 
-
-    # create_table :user_profiles do |t|
-    #   t.belongs_to :user, foreign_key: true
-    #   t.integer :user_type_cd, default: 0
-    #   t.timestamps
-    # end
-
-    create_table :jobs do |t|
-      t.string :company
+    create_table :job_adverts do |t|
+      t.references :company, null: false
       t.text :description
+      t.integer :subscription_status_cd
       t.timestamps
     end
 

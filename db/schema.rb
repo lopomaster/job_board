@@ -26,11 +26,12 @@ ActiveRecord::Schema.define(version: 2019_06_14_203215) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "jobs", force: :cascade do |t|
-    t.string "company"
-    t.string "description"
+  create_table "job_adverts", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_job_adverts_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
