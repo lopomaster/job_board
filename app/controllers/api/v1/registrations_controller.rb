@@ -12,7 +12,9 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       profile_klass = User::PROFILE_TYPES.detect { |m| user_params[:profile_type].classify.constantize == m }
     ensure
       unless profile_klass
-        "Incorrect profile type (klass)"
+        build_resource(user_params.except(:profile_attributes))
+        resource.save
+        render_resource(resource)
         return
       end
     end
