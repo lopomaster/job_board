@@ -1,4 +1,4 @@
 class JobAdvertSerializer < ApplicationSerializer
-  attributes :description
+  attributes :description, :id
   has_one :company
 end

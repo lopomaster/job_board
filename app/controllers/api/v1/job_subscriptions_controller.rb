@@ -9,8 +9,8 @@ class Api::V1::JobSubscriptionsController < Api::V1::ApplicationController
     render json: @job_subscription, status: :ok
   end
 
-  # My subscriptions as candidate
-  def index
+  # Listing subscriptions as candidate
+  def my_subscriptions_as_candidate
     authorize! :index, JobSubscription.new
     @q = current_user.profile.job_subscriptions.ransack(params[:q])
     @job_subscriptions = @q.result.page( params[:page] ).per(@per_page)

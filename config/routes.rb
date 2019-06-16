@@ -9,8 +9,15 @@ Rails.application.routes.draw do
       end
       get 'user/:username', to: 'users#show', as: :username
 
-      resources :job_adverts
-      resources :job_subscriptions
+      resources :job_adverts, except: :index do
+        get :my_adverts_as_candidate, on: :collection
+        get :my_adverts_as_company, on: :collection
+        get :list_adverts, on: :collection
+      end
+      resources :job_subscriptions, except: :index do
+        get :my_subscriptions_as_candidate, on: :collection
+        get :my_subscriptions_as_company, on: :collection
+      end
 
     end
   end

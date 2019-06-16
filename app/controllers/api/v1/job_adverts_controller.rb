@@ -9,9 +9,19 @@ before_action :set_job_advert, only: [:show, :update]
     render json: @job_advert, status: :ok
   end
 
-  # My adverts as candidate
-  def index
+  # My adverts as company
+  def my_adverts_as_company
+    authorize! :my_adverts_as_company, JobAdvert.new
     @q = current_user.profile.job_adverts.ransack(params[:q])
+    @job_adverts = @q.result.page( params[:page] ).per(@per_page)
+    render json: @job_adverts, each_serializer: JobAdvertSerializer,
+           serializer: ActiveModel::Serializer::CollectionSerializer
+  end
+
+  # My adverts as candidate
+  def my_adverts_as_candidate
+    authorize! :my_adverts_as_candidate, JobAdvert.new
+    @q = current_user.profile.subscription_job_adverts.ransack(params[:q])
     @job_adverts = @q.result.page( params[:page] ).per(@per_page)
     render json: @job_adverts, each_serializer: JobAdvertSerializer,
            serializer: ActiveModel::Serializer::CollectionSerializer
