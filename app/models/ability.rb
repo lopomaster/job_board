@@ -23,11 +23,11 @@ class Ability
         user.profile_type == 'Company'
       end
 
-      can :my_adverts_as_company, JobAdvert do |job_advert|
+      can :my_adverts_as_company, JobAdvert do
         user.profile_type == 'Company'
       end
 
-      can :my_adverts_as_candidate, JobAdvert do |job_advert|
+      can :my_adverts_as_candidate, JobAdvert do
         user.profile_type == 'Candidate'
       end
 

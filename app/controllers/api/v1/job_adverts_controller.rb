@@ -2,7 +2,7 @@ class Api::V1::JobAdvertsController < Api::V1::ApplicationController
 
 before_action :set_job_advert, only: [:show, :update]
 
-  load_and_authorize_resource :job_advert
+  load_and_authorize_resource :job_advert, except: [ :my_adverts_as_company, :my_adverts_as_candidate]
   respond_to :json
 
   def show

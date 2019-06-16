@@ -53,14 +53,40 @@ RSpec.describe Ability, type: :model do
     end
 
 
-    # can :my_adverts_as_company, JobAdvert do |job_advert|
-    #   user.profile_type == 'Company'
+    context "Company User can list adverts created" do
+      let(:user) { create(:user, :as_company) }
+      let(:job_advert) { create(:job_advert, company: user.profile) }
+
+      it do
+        should be_able_to(:my_adverts_as_company, JobAdvert)
+      end
+    end
+
+    context "Candidate User can not list adverts created" do
+      let(:user) { create(:user, :as_candidate) }
+      it do
+        should_not be_able_to(:my_adverts_as_company, JobAdvert)
+      end
+    end
+
+
+    # context "Candidate User can list adverts as candidate" do
+    #   let(:user) { create(:user, :as_candidate) }
+    #   let(:job_advert) { create(:job_advert) }
+    #
+    #   it do
+    #     should be_able_to(:my_adverts_as_candidate, JobAdvert)
+    #   end
     # end
     #
-    # can :my_adverts_as_candidate, JobAdvert do |job_advert|
-    #   user.profile_type == 'Candidate'
+    # context "Company User can not list adverts as candidate" do
+    #   let(:user) { create(:user, :as_company) }
+    #   let(:job_advert) { create(:job_advert, company: user.profile) }
+    #
+    #   it do
+    #     should_not be_able_to(:my_adverts_as_candidate, JobAdvert)
+    #   end
     # end
-
 
     # Users
 
