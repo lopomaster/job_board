@@ -23,7 +23,7 @@ before_action :set_job_advert, only: [:show, :update]
   end
 
   def update
-    @job_advert.update(user_params)
+    @job_advert.update(job_advert_params)
     render_resource @job_advert
   end
 
