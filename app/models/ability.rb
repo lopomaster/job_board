@@ -5,7 +5,7 @@ class Ability
 
     if user.present?
       can :update, User do |user_element|
-        user_element.id = user.id
+        user_element.id == user.id
       end
 
       can :read, User do

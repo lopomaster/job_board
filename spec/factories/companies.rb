@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :company do
-    name                    { Faker::Movies::StarWars.specie }
+    name                    { Faker::Name.unique.name }
     description             { Faker::Lorem.paragraph }
   end
 end
