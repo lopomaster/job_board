@@ -8,9 +8,9 @@ module ExceptionHandler
 
   included do
     # Define custom handlers
-    rescue_from StandardError do |e|
-      error message: e.message, code: 'OT'
-    end
+    # rescue_from StandardError do |e|
+    #   error message: e.message, code: 'OT'
+    # end
     rescue_from ActiveRecord::RecordInvalid do |e|
       error ApiMessage.unprocessable_entity
     end
@@ -35,6 +35,11 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordNotFound do |e|
       not_found ApiMessage.not_found
     end
+
+    rescue_from CanCan::AccessDenied do |e|
+      not_found ApiMessage.access_denied
+    end
+
   end
 
   private

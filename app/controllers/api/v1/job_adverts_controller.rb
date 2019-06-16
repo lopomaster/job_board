@@ -9,8 +9,17 @@ before_action :set_job_advert, only: [:show, :update]
     render json: @job_advert, status: :ok
   end
 
+  # My adverts as candidate
   def index
     @q = current_user.profile.job_adverts.ransack(params[:q])
+    @job_adverts = @q.result.page( params[:page] ).per(@per_page)
+    render json: @job_adverts, each_serializer: JobAdvertSerializer,
+           serializer: ActiveModel::Serializer::CollectionSerializer
+  end
+
+  # List all adverts
+  def list_adverts
+    @q = JobAdvert.all.ransack(params[:q])
     @job_adverts = @q.result.page( params[:page] ).per(@per_page)
     render json: @job_adverts, each_serializer: JobAdvertSerializer,
            serializer: ActiveModel::Serializer::CollectionSerializer
@@ -39,7 +48,7 @@ before_action :set_job_advert, only: [:show, :update]
   end
 
 
-  def new_instance build_params
+  def new_instance build_params = {}
     @job_advert = current_user.profile.job_adverts.build build_params
   end
 

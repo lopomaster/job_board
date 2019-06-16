@@ -25,11 +25,19 @@ class CreateTables < ActiveRecord::Migration[5.2]
     add_index :users, :username, unique: true
 
     create_table :job_adverts do |t|
-      t.references :company, null: false
+      t.belongs_to :company, null: false, foreign_key: true
       t.text :description
-      t.integer :subscription_status_cd
       t.timestamps
     end
+
+    create_table :job_subscriptions do |t|
+      t.belongs_to :candidate, null: false, foreign_key: true
+      t.belongs_to :job_advert, null: false, foreign_key: true
+      t.integer :subscription_status_cd, default: 0
+      t.timestamps
+    end
+
+    add_index :job_subscriptions, [:company_id, :candidate_id ], :unique => true
 
     create_table :companies do |t|
       t.string :name

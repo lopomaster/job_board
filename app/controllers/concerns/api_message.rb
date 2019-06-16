@@ -45,4 +45,8 @@ class ApiMessage
 
   end
 
+  def self.access_denied
+    { message: 'You are not authorized', code: 'NA'}
+  end
+
 end

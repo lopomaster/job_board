@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'user/:username', to: 'users#show', as: :username
 
       resources :job_adverts
+      resources :job_subscriptions
 
     end
   end

@@ -27,11 +27,22 @@ ActiveRecord::Schema.define(version: 2019_06_14_203215) do
   end
 
   create_table "job_adverts", force: :cascade do |t|
-    t.integer "company_id", null: false
+    t.integer "job_advert_id", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_job_adverts_on_company_id"
+    t.index ["job_advert_id"], name: "index_job_adverts_on_company_id"
+  end
+
+  create_table "job_subscriptions", force: :cascade do |t|
+    t.integer "candidate_id", null: false
+    t.integer "job_advert_id", null: false
+    t.integer "subscription_status_cd", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_job_subscriptions_on_candidate_id"
+    t.index ["job_advert_id", "candidate_id"], name: "index_job_subscriptions_on_job_advert_id_and_candidate_id", unique: true
+    t.index ["job_advert_id"], name: "index_job_subscriptions_on_job_advert_id"
   end
 
   create_table "users", force: :cascade do |t|
